@@ -1,23 +1,23 @@
 // estoque pode conter:
-// nome produto
-// id produto
-// quantidade
-// material
+// nome produto,
+// id produto,
+// quantidade,
+// material.
 
 // cliente:
-// nome cliente
-// telefone
-// cpf
-// nome loja (se vender o produto em lojas)
-// quatidade produto
-// id produto           
+// nome cliente,
+// telefone,
+// cpf,
+// nome loja (se vender o produto em lojas),
+// quatidade produto,
+// id produto.           
 
 
 
 
 
 class Cliente{
-    private nome:string
+    protected nome:string
     private contato:number
     private cpf:number
     private tipoCliente:string//PF ou CNPJ 
@@ -47,12 +47,10 @@ class Estoque{
         this.quantidade = quantidade
         this.preco = preco 
 
-    }
-     
-    venda(quantidade, idProduto): 
+    }     
 }
 
-let vetor[]:Estoque 
+let vetor [] = Estoque 
 
 class Venda{
     constructor(nome:string){
