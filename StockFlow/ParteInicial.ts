@@ -1,21 +1,3 @@
-// estoque pode conter:
-// nome produto,
-// id produto,
-// quantidade,
-// material.
-
-// cliente:
-// nome cliente,
-// telefone,
-// cpf,
-// nome loja (se vender o produto em lojas),
-// quatidade produto,
-// id produto.           
-
-
-
-// CRIAÇÃO DA CLASSE PRODUTO
-
 class Produto {
     private _id: number
     private _nomeProduto: string
@@ -34,23 +16,38 @@ class Produto {
     getId(): number {
         return this._id
     }
+    setId(id: number): void {
+        this._id = id
+    }
     getNome(): string {
-        return  this._nomeProduto
+        return this._nomeProduto
+    }
+    setNome(nome: string): void {
+        this._nomeProduto = nome
     }
     getQuat(): number {
         return this._quantidade
     }
+    setQuantidade(quantidade: number): void {
+        this._quantidade = quantidade
+    }
     getMaterial(): string {
         return this._material
     }
-
+    setMaterial(material: string): void {
+        this._material = material
+    }
+    setValor(valor: number): void {
+        this._valor = valor
+    }
     mostrarProduto(): void {
-        console.log("===== PRODUTO =====");
-        console.log("ID: "+ this._id);
-        console.log("Nome: "+ this._nomeProduto);
-        console.log("Quantidade:"+ this._quantidade);
-        console.log("Material:"+ this._material);
-        console.log("===================");
+        alert("===== PRODUTO =====" +
+        "\n ID: "+ this._id +
+        "\n Nome: "+ this._nomeProduto +
+        "\n Quantidade: "+ this._quantidade +
+        "\n Material: "+ this._material +
+        "\n Valor: "+ this._valor +
+        "\n ===================")
 }
 }
 
@@ -71,17 +68,46 @@ class Cliente {
     }
 
     getNome(): string {
-        return  this._nome
+        return this._nome
     }
+    setNome(nome: string): void {
+        this._nome = nome
+    }
+    getTelefone(): number {
+        return this._telefone
+    }
+    setTelefone(telefone: number): void {
+        this._telefone = telefone
+    }
+    getCpf(): number {
+        return this._cpf
+    }
+    setCpf(cpf: number): void {
+        this._cpf = cpf
+    }
+    getEndereco(): string {
+        return this._endereco
+    }
+    setEndereco(endereco: string): void {
+        this._endereco = endereco
+    }
+    getCnpj(): string {
+        return this._cnpj
+    }
+    setCnpj(cnpj: string): void {
+        this._cnpj = cnpj
+    }
+        
 
     mostrarCliente(): void {
-        console.log("===== CLIENTE =====")
-        console.log("Nome: " + this._nome)
-        console.log("Telefone: " + this._telefone)
-        console.log("CPF: " + this._cpf)
-        console.log("Endereço: " + this._endereco)
-        console.log("===================")
-
+        alert("===== CLIENTE ====="+
+        "\n Nome: " + this._nome +
+        "\n Telefone: " + this._telefone +
+        "\n CPF: " + this._cpf +
+        "\n Endereço: " + this._endereco +
+        "\n CNPJ: " + this._cnpj +
+        "\n===================")
+        
 }
     // compra(): {
     //     let produto:Produto = new Produto ()
@@ -112,17 +138,84 @@ class Venda {
     
 
 }
-let cadastro:number = Number(prompt("Digite 1-Cadastrar Cliente, 2-Cadastrar Produto, 3-compra, 4-alterar produto 5-alterar cliente, 6-sair"))
+let nomeCliente = "",endereco = ""
+let telefone = 0,cpf = 0, cnpj = ""
 
-    if(cadastro == 1){
+let cliente:Cliente = new Cliente(nomeCliente,telefone,cpf,endereco)
+
+let id = 0, quantidade = 0, valor = 0
+let nome = "", material = ""
+
+let produto: Produto = new Produto(id, nome, quantidade, material, valor)
         
+
+let cadastro:number = Number(prompt("==== Digite ==== \n" +
+    "1-Cadastrar Cliente \n" + 
+    "2-Exibir cliente \n" + 
+    "3-Cadastrar Produto \n" +
+    "4-Exibir Produto \n" +
+    "5-compra \n" +
+    "6-alterar produto \n" +
+    "7-alterar dados do cliente \n" +
+    "8-sair"))
+
+while(cadastro !==8){
+    
+    if(cadastro == 1){
+    console.log("Cadastrar Cliente")
+
+        nomeCliente = String(prompt("Nome:"))
+        telefone = Number(prompt("Telefone:"))
+        cpf = Number(prompt("CPF:"))
+        endereco = String(prompt("Endereço:"))
+
+        cliente = new Cliente(nomeCliente, telefone, cpf, endereco);
+
+        let op: string = String(prompt("Caso possua CNPJ, digite: S-sim e N-nao")).toUpperCase()
+        if(op == "S"){
+            cnpj = String(prompt("Digite seu cnpj | exemplo: 00.000.000/0001-00 : "))
+            cliente.setCnpj(cnpj)
+        }
+        alert("Cliente cadastrado com Susesso!!")
+
+    }else if(cadastro ==2 ){
+       cliente.mostrarCliente()
+    
+    } else if (cadastro == 3) {
+        console.log("Cadastrar Produto")
+
+        id = Number(prompt("ID:"))
+        nome = String(prompt("Nome do produto:"))
+        quantidade = Number(prompt("Quantidade:"))
+        material = String(prompt("Material:"))
+        valor = Number(prompt("Valor:"))
+
+        produto = new Produto(id, nome, quantidade, material, valor)
+        alert("Produto cadastrado com Susesso!!")
+
+    }else if(cadastro == 4){
+        produto.mostrarProduto()
+
+    } else if (cadastro == 5) {
+        console.log("Compra")
+
+    } else if (cadastro == 6) {
+        console.log("Alterar Produto")
+
+    } else if (cadastro == 7) {
+        console.log("Alterar dados do cliente") 
+
+    } else {
+        alert("Opção inválida!")
     }
-
-let cliente:Cliente = new Cliente ("Joao",123, 4577, "rua k")
-
-cliente.mostrarCliente()
-
-let produto:Produto = new Produto(1, "almofada", 10,"plastico", 40 )
-
-produto.mostrarProduto()
-
+    cadastro = Number(prompt("==== Digite ==== \n" +
+    "1-Cadastrar Cliente \n" + 
+    "2-Exibir cliente \n" + 
+    "3-Cadastrar Produto \n" +
+    "4-Exibir Produto \n" +
+    "5-compra \n" +
+    "6-alterar produto \n" +
+    "7-alterar dados do cliente \n" +
+    "8-sair"))
+}
+console.log("Programa encerrado.")
